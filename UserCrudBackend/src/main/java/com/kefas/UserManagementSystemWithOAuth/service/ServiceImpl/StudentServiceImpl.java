@@ -1,13 +1,12 @@
 package com.kefas.UserManagementSystemWithOAuth.service.ServiceImpl;
 
-import com.kefas.CrudBackendAndFrontend.entities.Student;
-import com.kefas.CrudBackendAndFrontend.exception.StudentAlreadyExistException;
-import com.kefas.CrudBackendAndFrontend.repository.StudentRepository;
-import com.kefas.CrudBackendAndFrontend.service.StudentService;
-import com.kefas.CrudBackendAndFrontend.studentDto.StudentDto;
+import com.kefas.UserManagementSystemWithOAuth.entities.Student;
+import com.kefas.UserManagementSystemWithOAuth.exception.StudentAlreadyExistException;
+import com.kefas.UserManagementSystemWithOAuth.repository.StudentRepository;
+import com.kefas.UserManagementSystemWithOAuth.service.StudentService;
+import com.kefas.UserManagementSystemWithOAuth.studentDto.StudentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

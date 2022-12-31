@@ -1,8 +1,7 @@
 package com.kefas.UserManagementSystemWithOAuth.service;
 
-import com.kefas.CrudBackendAndFrontend.entities.Student;
-import com.kefas.CrudBackendAndFrontend.studentDto.StudentDto;
-
+import com.kefas.UserManagementSystemWithOAuth.entities.Student;
+import com.kefas.UserManagementSystemWithOAuth.studentDto.StudentDto;
 import java.util.List;
 
 public interface StudentService {
