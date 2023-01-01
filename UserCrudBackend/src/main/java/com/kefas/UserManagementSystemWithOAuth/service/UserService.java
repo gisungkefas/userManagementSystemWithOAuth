@@ -8,7 +8,7 @@ public interface UserService {
 
     UserDto createUser(UserDto userDto);
 
-    UserDto updateUser(UserDto userDto, Long userId);
+    UserDto editUser(UserDto userDto, Long userId);
 
     String deleteUser(Long userId);
 

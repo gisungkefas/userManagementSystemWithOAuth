@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(UserDto userDto, Long userId) {
+    public UserDto editUser(UserDto userDto, Long userId) {
         User user = userRepository.findById(userId).
                 orElseThrow(()-> new UserNotFoundException("Post with ID: "+ userId +" is not found"));
 
@@ -91,7 +91,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long userId) {
-        return null;
+        return userRepository.findById(userId)
+                .orElseThrow(() -> {
+                    throw new UserNotFoundException("Post with ID: " + userId + " Not Found");
+                });
     }
 
     @Override

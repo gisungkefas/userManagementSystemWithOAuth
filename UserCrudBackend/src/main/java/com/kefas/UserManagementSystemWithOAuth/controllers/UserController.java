@@ -23,10 +23,10 @@ public class UserController {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{userId}/update-user")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable Long userId) {
-        UserDto updateUser = userService.updateUser(userDto, userId);
-        return new ResponseEntity<>(updateUser, HttpStatus.OK);
+    @PutMapping("/{userId}/edit-user")
+    public ResponseEntity<UserDto> editUser(@RequestBody UserDto userDto, @PathVariable Long userId) {
+        UserDto editUser = userService.editUser(userDto, userId);
+        return new ResponseEntity<>(editUser, HttpStatus.OK);
 
     }
 
@@ -35,6 +35,12 @@ public class UserController {
         return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/get-user/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId){
+        User user = userService.getUserById(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+
+    }
 
     @GetMapping("/get-all-users")
     public ResponseEntity<List<User>> getAllUsers(){
