@@ -1,4 +1,4 @@
-package com.kefas.UserManagementSystemWithOAuth.studentDto;
+package com.kefas.UserManagementSystemWithOAuth.userDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentDto {
+public class UserDto {
 
     @Email
     private String email;
