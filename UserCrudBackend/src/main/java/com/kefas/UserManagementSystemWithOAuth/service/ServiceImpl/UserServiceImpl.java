@@ -9,6 +9,8 @@ import com.kefas.UserManagementSystemWithOAuth.userDto.UserDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,14 +29,14 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistException("User with "+userDto.getEmail()+"Already Exist");
         }
 
-//        students.setEmail(userDto.getEmail());
-//        students.setFirstName(userDto.getFirstName());
-//        students.setLastName(userDto.getLastName());
-//        students.setGender(userDto.getGender());
-//        students.setDob(userDto.getDob());
-//        students.setPhoneNumber(userDto.getPhoneNumber());
-//        students.setAddress(userDto.getAddress());
-        BeanUtils.copyProperties(userDto, users);
+        users.setEmail(userDto.getEmail());
+        users.setFirstName(userDto.getFirstName());
+        users.setLastName(userDto.getLastName());
+        users.setGender(userDto.getGender());
+        users.setDob(userDto.getDob());
+        users.setPhoneNumber(userDto.getPhoneNumber());
+        users.setAddress(userDto.getAddress());
+//        BeanUtils.copyProperties(userDto, users);
         userRepository.save(users);
 
         return userDto;
@@ -42,7 +44,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto userDto, Long userId) {
-        return null;
+        User user = userRepository.findById(userId).
+                orElseThrow(()-> new UserNotFoundException("Post with ID: "+ userId +" is not found"));
+
+        if(userDto.getEmail() != null && !userDto.getEmail().equals(user.getEmail())){
+            user.setEmail(userDto.getEmail());
+        }
+
+        if(userDto.getFirstName() != null && !userDto.getFirstName().equals(user.getFirstName())){
+            user.setFirstName(userDto.getFirstName());
+        }
+
+        if (userDto.getLastName() != null && !userDto.getLastName().equals(user.getLastName())){
+            user.setLastName(userDto.getLastName());
+        }
+
+        if (userDto.getGender() != null && !userDto.getGender().equals(user.getGender())){
+            user.setGender(userDto.getGender());
+        }
+
+        if (userDto.getDob() != null && !userDto.getDob().equals(user.getDob())){
+            user.setDob(userDto.getDob());
+        }
+
+        if (userDto.getPhoneNumber() != null && !userDto.getPhoneNumber().equals(user.getPhoneNumber())){
+            user.setPhoneNumber(userDto.getPhoneNumber());
+        }
+
+        if (userDto.getAddress() != null && !userDto.getAddress().equals(user.getAddress())){
+            user.setAddress(userDto.getAddress());
+        }
+
+        userRepository.save(user);
+
+        return userDto;
     }
 
     @Override

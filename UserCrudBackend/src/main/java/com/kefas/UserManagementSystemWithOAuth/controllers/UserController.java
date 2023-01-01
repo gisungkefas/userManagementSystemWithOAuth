@@ -18,18 +18,25 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add")
+    @PostMapping("/create-user")
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/{userId}/delete")
+    @PutMapping("/{userId}/update-user")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable Long userId) {
+        UserDto updateUser = userService.updateUser(userDto, userId);
+        return new ResponseEntity<>(updateUser, HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/{userId}/delete-user")
     public ResponseEntity<String> deleteUser(@PathVariable Long userId){
         return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.ACCEPTED);
     }
 
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all-users")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
