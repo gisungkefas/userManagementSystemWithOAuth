@@ -2,6 +2,7 @@ package com.kefas.UserManagementSystemWithOAuth.service.ServiceImpl;
 
 import com.kefas.UserManagementSystemWithOAuth.entities.User;
 import com.kefas.UserManagementSystemWithOAuth.exception.UserAlreadyExistException;
+import com.kefas.UserManagementSystemWithOAuth.exception.UserNotFoundException;
 import com.kefas.UserManagementSystemWithOAuth.repository.UserRepository;
 import com.kefas.UserManagementSystemWithOAuth.service.UserService;
 import com.kefas.UserManagementSystemWithOAuth.userDto.UserDto;
@@ -46,7 +47,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String deleteUser(Long userId) {
-        return null;
+        User user = userRepository.findById(userId).
+                orElseThrow(()-> new UserNotFoundException("User with ID: "+ userId +" is not found"));
+
+        userRepository.delete(user);
+        return "Post Deleted Successfully";
     }
 
     @Override

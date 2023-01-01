@@ -23,6 +23,12 @@ public class UserController {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.ACCEPTED);
     }
 
+    @DeleteMapping("/{userId}/delete")
+    public ResponseEntity<String> deleteUser(@PathVariable Long userId){
+        return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.ACCEPTED);
+    }
+
+
     @GetMapping("/getAll")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUsers();
