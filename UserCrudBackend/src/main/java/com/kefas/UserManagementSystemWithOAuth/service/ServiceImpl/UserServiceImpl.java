@@ -1,16 +1,14 @@
 package com.kefas.UserManagementSystemWithOAuth.service.ServiceImpl;
 
-import com.kefas.UserManagementSystemWithOAuth.entities.User;
+import com.kefas.UserManagementSystemWithOAuth.entities.Users;
 import com.kefas.UserManagementSystemWithOAuth.exception.UserAlreadyExistException;
 import com.kefas.UserManagementSystemWithOAuth.exception.UserNotFoundException;
 import com.kefas.UserManagementSystemWithOAuth.repository.UserRepository;
 import com.kefas.UserManagementSystemWithOAuth.service.UserService;
 import com.kefas.UserManagementSystemWithOAuth.userDto.UserDto;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) {
-        User users = new User();
+        Users users = new Users();
 
         boolean existUser = userRepository.findByEmail(userDto.getEmail()).isPresent();
         if(existUser){
@@ -44,8 +42,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto editUser(UserDto userDto, Long userId) {
-        User user = userRepository.findById(userId).
-                orElseThrow(()-> new UserNotFoundException("Post with ID: "+ userId +" is not found"));
+        Users user = userRepository.findById(userId).
+                orElseThrow(()-> new UserNotFoundException("User with ID: "+ userId +" is not found"));
 
         if(userDto.getEmail() != null && !userDto.getEmail().equals(user.getEmail())){
             user.setEmail(userDto.getEmail());
@@ -82,23 +80,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String deleteUser(Long userId) {
-        User user = userRepository.findById(userId).
+        Users user = userRepository.findById(userId).
                 orElseThrow(()-> new UserNotFoundException("User with ID: "+ userId +" is not found"));
 
         userRepository.delete(user);
-        return "Post Deleted Successfully";
+        return "User Deleted Successfully";
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public Users getUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> {
-                    throw new UserNotFoundException("Post with ID: " + userId + " Not Found");
+                    throw new UserNotFoundException("User with ID: " + userId + " Not Found");
                 });
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 }

@@ -1,6 +1,6 @@
 package com.kefas.UserManagementSystemWithOAuth.controllers;
 
-import com.kefas.UserManagementSystemWithOAuth.entities.User;
+import com.kefas.UserManagementSystemWithOAuth.entities.Users;
 import com.kefas.UserManagementSystemWithOAuth.service.UserService;
 import com.kefas.UserManagementSystemWithOAuth.userDto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +36,15 @@ public class UserController {
     }
 
     @GetMapping("/get-user/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId){
-        User user = userService.getUserById(userId);
+    public ResponseEntity<Users> getUserById(@PathVariable Long userId){
+        Users user = userService.getUserById(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
 
     }
 
     @GetMapping("/get-all-users")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = userService.getAllUsers();
+    public ResponseEntity<List<Users>> getAllUsers(){
+        List<Users> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
